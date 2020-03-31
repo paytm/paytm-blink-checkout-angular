@@ -1,0 +1,15 @@
+<textarea cols="50" rows="25" [value]="config | stringifyJson : 4" (blur)="updateConfig($event.target.value)">
+  </textarea>
+<div>
+  <button type="button" (click)="toggleCheckout()">
+    Toggle Checkout Screen
+  </button>
+  <button type="button" (click)="initializeCheckout()">
+    Re-render with updated config
+  </button>
+</div>
+<br />
+
+<div><b>CHECKOUT VISIBILITY :</b> {{isCheckoutVisible}}</div>
+
+<paytm-checkout *ngIf="isCheckoutVisible"></paytm-checkout>
