@@ -6,6 +6,7 @@ export interface CheckoutInstance {
     onLoad?: (fn: Function) => void,
     init?: (config: any) => Promise<any>,
     close?: () => void,
+    invoke?: () => void,
     initLib?: (merchantId: string) => Promise<any>,
     PAYMODE?: StringDictionary,
     FLOW?: StringDictionary,

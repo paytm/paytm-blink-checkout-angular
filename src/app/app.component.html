@@ -7,6 +7,7 @@
   <button type="button" (click)="initializeCheckout()">
     Re-render with updated config
   </button>
+  <input type="checkbox" [checked]="openInPopup" (change)="openInPopup = !openInPopup; initializeCheckout();" /> Open in popup
 </div>
 <br />
 
