@@ -32,7 +32,12 @@ export class AppModule { }
 ```
 
 ### CheckoutService
-The service provide methods for setting up Paytm Blink Checkout JS in a project. It sets the Paytm Blink JS instance, which could be retrieved from checkoutJsInstance$ observable from the service.  To initialize, one need to call service init method with config and optional openInPopup boolean value. The **config** argument is mandatory to be passed in order to initialize Paytm React Checkout JS library. Optional openInPopup argument could be passed to show checkout in popup or not, by default it's value is true.
+The service provide methods for setting up Paytm Blink Checkout JS in a project. It sets the Paytm Blink JS instance, which could be retrieved from checkoutJsInstance$ observable from the service.  To initialize, one need to call service init method with config and optional openInPopup boolean value. The **config** argument is mandatory to be passed in order to initialize Paytm React Checkout JS library. 
+In options (optional second argument) following could be passed:  
+1. openInPopup (optional): To show checkout in popup or not, by default it's value is true.
+2. env (optional): To load Paytm Blink Checkout JS from 'STAGE' or 'PROD' env, by default it's value is 'PROD'.
+3. checkoutJsInstance (optional): To use existing checkoutjs instance.
+
 
 The  config should be of same format as the  Paytm Blink Checkout JS library, which could be checked from this [link](https://staticpg.paytm.in/checkoutjs/21/docs/#/configuration).
 
@@ -72,8 +77,11 @@ export class AppComponent implements OnDestroy{
           notifyMerchant: this.notifyMerchantHandler
         }
       },
-      //open in popup (optional)
-      true
+      //options
+      {
+        env: 'PROD', // optional, possible values : STAGE, PROD; default : PROD
+        openInPopup: true // optional; default : true
+      }
     );
 
     this.subs = this.checkoutService

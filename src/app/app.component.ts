@@ -43,6 +43,6 @@ export class AppComponent {
 
   initializeCheckout(): void {
     const config = this.appendHandler(this.config);
-    this.checkoutService.init(config, this.openInPopup);
+    this.checkoutService.init(config, { env: 'STAGE', openInPopup: this.openInPopup});
   }
 }

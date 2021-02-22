@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import CONSTANTS from '../constants';
 import { WINDOW_TOKEN, Window } from './window.service';
 import { ReplaySubject } from 'rxjs';
-import { CheckoutInstance } from './../interfaces';
+import { ICheckoutInstance, CheckoutOptions, Env , ICheckoutOptions} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,10 @@ export class CheckoutService implements OnDestroy {
   private openInPopup = true;
   private isScriptLoaded = false;
   private isScriptLoading = false;
-  private receivedCheckoutJsInstance: CheckoutInstance;
+  private receivedCheckoutJsInstance: ICheckoutInstance;
   readonly checkoutJsContainerId = CONSTANTS.IDS.CHECKOUT_ELEMENT + (new Date()).getTime();
 
-  private readonly checkoutJsInstanceSource$ = new ReplaySubject<CheckoutInstance>(1);
+  private readonly checkoutJsInstanceSource$ = new ReplaySubject<ICheckoutInstance>(1);
   readonly checkoutJsInstance$ = this.checkoutJsInstanceSource$.asObservable();
 
   constructor(
@@ -24,25 +24,27 @@ export class CheckoutService implements OnDestroy {
     @Inject(DOCUMENT) private readonly document: any) {
   }
 
-  init(config: any, openInPopup = true, checkoutJsInstance?: CheckoutInstance): void {
+  init(config: any, options?: ICheckoutOptions): void {
+    options = CheckoutOptions.from(options);
+
     const merchantId = config && config.merchant && config.merchant.mid;
 
     if (merchantId) {
       const prevMerchantId = this.config && this.config.merchant && this.config.merchant.mid;
       this.config = config;
-      this.openInPopup = openInPopup;
+      this.openInPopup = options.openInPopup;
 
-      if (checkoutJsInstance) {
-        this.receivedCheckoutJsInstance = checkoutJsInstance;
-        this.checkoutJsInstanceSource$.next(checkoutJsInstance);
+      if (options.checkoutJsInstance) {
+        this.receivedCheckoutJsInstance = options.checkoutJsInstance;
+        this.checkoutJsInstanceSource$.next(options.checkoutJsInstance);
       }
 
-      if ((checkoutJsInstance || this.isScriptLoaded) && merchantId === prevMerchantId) {
+      if ((options.checkoutJsInstance || this.isScriptLoaded) && merchantId === prevMerchantId) {
         this.initializeCheckout();
         this.checkoutJsInstance$
       }
       else if (!this.isScriptLoading || (prevMerchantId && merchantId !== prevMerchantId)) {
-        this.loadCheckoutScript(merchantId);
+        this.loadCheckoutScript(merchantId, options.env);
       }
 
     } else {
@@ -50,12 +52,12 @@ export class CheckoutService implements OnDestroy {
     }
   }
 
-  private loadCheckoutScript(merchantId: string): void {
+  private loadCheckoutScript(merchantId: string, env: Env): void {
     this.isScriptLoaded = false;
     this.isScriptLoading = true;
     const scriptElement = this.document.createElement('script');
     scriptElement.async = true;
-    scriptElement.src = CONSTANTS.LINKS.CHECKOUT_JS_URL.concat(merchantId);
+    scriptElement.src = CONSTANTS.HOSTS[env] + CONSTANTS.LINKS.CHECKOUT_JS_URL.concat(merchantId);
     scriptElement.type = 'application/javascript';
     scriptElement.onload = this.setupCheckoutJs;
     scriptElement.onError = () => {
@@ -96,7 +98,7 @@ export class CheckoutService implements OnDestroy {
     }
   }
 
-  private getCheckoutJsObj(): CheckoutInstance | null {
+  private getCheckoutJsObj(): ICheckoutInstance | null {
     const window = this.window;
 
     if (this.receivedCheckoutJsInstance) {
