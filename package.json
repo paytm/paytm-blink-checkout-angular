@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve": "ng serve",
+    "start": "npm run build-lib && npm run serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-lib": "ng build angular-checkout-js",
-    "npm-pack": "cd dist/angular-checkout-js && npm pack",
+    "npm-pack": "cd dist/paytm-blink-checkout-angular && npm pack",
     "package": "npm run build-lib && npm run npm-pack"
   },
   "private": true,

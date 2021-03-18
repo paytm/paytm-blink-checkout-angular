@@ -53,23 +53,28 @@ export class AppComponent implements OnDestroy{
   private subs: Subscription;
 
   constructor(private readonly checkoutService: CheckoutService) {
-    this.checkoutService.init({
-      data: {
-        orderId: "test4",
-        amount: "3337",
-        token: "e334366c509b4294a285a3b42a5659ea1584106015734",
-        tokenType: "TXN_TOKEN"
+    this.checkoutService.init(
+      //config
+      {
+        data: {
+          orderId: "test4",
+          amount: "3337",
+          token: "e334366c509b4294a285a3b42a5659ea1584106015734",
+          tokenType: "TXN_TOKEN"
+        },
+        merchant: {
+          mid: "wHNUTH68224456779429",
+          name: "Dummy",
+          redirect: true
+        },
+        flow: "DEFAULT",
+        handler: {
+          notifyMerchant: this.notifyMerchantHandler
+        }
       },
-      merchant: {
-        mid: "wHNUTH68224456779429",
-        name: "Dummy",
-        redirect: true
-      },
-      flow: "DEFAULT",
-      handler: {
-        notifyMerchant: this.notifyMerchantHandler
-      }
-    });
+      //open in popup (optional)
+      true
+    );
 
     this.subs = this.checkoutService
       .checkoutJsInstance$

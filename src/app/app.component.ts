@@ -9,6 +9,7 @@ import { CheckoutService } from 'paytm-blink-checkout-angular';
 export class AppComponent {
   config = CONFIG;
   isCheckoutVisible = false;
+  openInPopup = true;
 
   constructor(private readonly checkoutService: CheckoutService) {
     this.initializeCheckout();
@@ -42,6 +43,6 @@ export class AppComponent {
 
   initializeCheckout(): void {
     const config = this.appendHandler(this.config);
-    this.checkoutService.init(config);
+    this.checkoutService.init(config, this.openInPopup);
   }
 }
