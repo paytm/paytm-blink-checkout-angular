@@ -1,9 +1,9 @@
 import { InjectionToken } from '@angular/core';
-import { CheckoutInstance } from './../interfaces';
+import { ICheckoutInstance } from '../models';
 
 export interface Window {
     Paytm?: {
-        CheckoutJS?: CheckoutInstance
+        CheckoutJS?: ICheckoutInstance
     };
 }
 
