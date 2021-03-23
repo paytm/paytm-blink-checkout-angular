@@ -41,7 +41,6 @@ export class CheckoutService implements OnDestroy {
 
       if ((options.checkoutJsInstance || this.isScriptLoaded) && merchantId === prevMerchantId) {
         this.initializeCheckout();
-        this.checkoutJsInstance$
       }
       else if (!this.isScriptLoading || (prevMerchantId && merchantId !== prevMerchantId)) {
         this.loadCheckoutScript(merchantId, options.env);
