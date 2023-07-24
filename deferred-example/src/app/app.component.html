@@ -1,0 +1,20 @@
+<div>
+  <textarea cols="70" rows="25" [value]="mConfig | stringifyJson : 4" (blur)="updateMerchantConfig($event.target.value)"></textarea>
+</div>
+<div>
+  <textarea cols="70" rows="7" [value]="iConfig | stringifyJson : 4" (blur)="updateIntegrationConfig($event.target.value)"></textarea>
+</div>
+<div>
+  <button type="button" (click)="toggleCheckout()">
+    Toggle Checkout Screen
+  </button>
+  <button type="button" (click)="initializeCheckout()">
+    Re-render with updated config
+  </button>
+  <input type="checkbox" [checked]="openInPopup" (change)="openInPopup = !openInPopup; initializeCheckout();" /> Open in popup
+</div>
+<br />
+
+<div><b>CHECKOUT VISIBILITY :</b> {{isCheckoutVisible}}</div>
+
+<paytm-checkout *ngIf="isCheckoutVisible"></paytm-checkout>
