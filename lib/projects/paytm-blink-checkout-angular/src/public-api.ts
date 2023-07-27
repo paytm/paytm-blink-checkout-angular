@@ -1,5 +1,5 @@
 /*
- * Public API Surface of angular-checkout-js
+ * Public API Surface of paytm-blink-checkout-angular
  */
 
 export * from './lib/services/checkout.service';

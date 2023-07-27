@@ -1,5 +1,5 @@
 {
-  "name": "angular-checkout-js",
+  "name": "paytm-blink-checkout-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

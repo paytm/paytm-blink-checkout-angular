@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-checkout-js": {
+    "paytm-blink-checkout-angular": {
       "projectType": "library",
-      "root": "projects/angular-checkout-js",
-      "sourceRoot": "projects/angular-checkout-js/src",
+      "root": "projects/paytm-blink-checkout-angular",
+      "sourceRoot": "projects/paytm-blink-checkout-angular/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/angular-checkout-js/ng-package.json"
+            "project": "projects/paytm-blink-checkout-angular/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/angular-checkout-js/tsconfig.lib.prod.json"
+              "tsConfig": "projects/paytm-blink-checkout-angular/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/angular-checkout-js/tsconfig.lib.json"
+              "tsConfig": "projects/paytm-blink-checkout-angular/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/angular-checkout-js/tsconfig.spec.json",
+            "tsConfig": "projects/paytm-blink-checkout-angular/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

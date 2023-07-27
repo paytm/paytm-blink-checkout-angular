@@ -12,8 +12,8 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "angular-checkout-js": [
-        "dist/angular-checkout-js"
+      "paytm-blink-checkout-angular": [
+        "dist/paytm-blink-checkout-angular"
       ]
     },
     "declaration": false,
