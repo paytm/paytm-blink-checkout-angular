@@ -5,8 +5,8 @@ const CONSTANTS = {
         STAGE: 'STAGE'
     },
     HOSTS: {
-        PROD: 'https://securegw.paytm.in',
-        STAGE: 'https://securegw-stage.paytm.in'
+        PROD: 'https://secure.paytmpayments.com',
+        STAGE: 'https://securestage.paytmpayments.com'
     },
     LINKS: {
         CHECKOUT_JS_URL: '/merchantpgpui/checkoutjs/merchants/'
